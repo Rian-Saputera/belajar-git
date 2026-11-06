@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+left to right direction
+
+actor "Mahasiswa" as mhs
+actor "Admin Ruangan" as admin
+
+rectangle "Sistem Peminjaman Ruangan Kampus" {
+    usecase "Melihat Jadwal Ruangan" as UC1
+    usecase "Mengajukan Peminjaman" as UC2
+    usecase "Mengunggah Surat Izin Kegiatan" as UC3
+    usecase "Memverifikasi Pengajuan" as UC4
+    usecase "Mengelola Data Ruangan" as UC5
+    usecase "Melihat Riwayat Peminjaman" as UC6
+}
+
+mhs --> UC1
+mhs --> UC2
+mhs --> UC3
+mhs --> UC6
+
+admin --> UC1
+admin --> UC4
+admin --> UC5
+
+UC2 ..> UC3 : <<include>>
+@enduml
