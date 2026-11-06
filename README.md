@@ -31,3 +31,4 @@ Jalankan perintah berikut di Git Bash untuk menguji repositori ini:
 git clone [https://github.com/Rian-Saputera/belajar-git.git](https://github.com/Rian-Saputera/belajar-git.git)
 cd belajar-git
 git log --oneline --graph --all
+Dokumentasi diperbarui untuk verifikasi commit alur remote.
