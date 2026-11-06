@@ -1,0 +1,33 @@
+skinparam defaultFontName "Segoe UI"
+skinparam roundcorner 8
+skinparam shadowing false
+skinparam ArrowColor #2C3E50
+
+skinparam ActorBorderColor #2C3E50
+skinparam ActorBackgroundColor #ECF0F1
+
+skinparam usecase {
+    BackgroundColor #E8F8F5
+    BorderColor #16A085
+    FontColor #16A085
+}
+
+skinparam activity {
+    BackgroundColor #EBF5FB
+    BorderColor #2980B9
+    DiamondBackgroundColor #FEF9E7
+    DiamondBorderColor #F39C12
+}
+
+skinparam sequence {
+    LifeLineBorderColor #2980B9
+    LifeLineBackgroundColor #EBF5FB
+    ParticipantBackgroundColor #EBF5FB
+    ParticipantBorderColor #2980B9
+}
+
+skinparam class {
+    BackgroundColor #FEF9E7
+    BorderColor #F39C12
+    HeaderBackgroundColor #FAD7A0
+}
