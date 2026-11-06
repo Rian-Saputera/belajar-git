@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+autonumber
+
+actor "Mahasiswa" as mhs
+boundary "Halaman Peminjaman" as UI
+control "PeminjamanController" as CTRL
+database "Database" as DB
+
+mhs -> UI : Input form dan klik "Kirim Pengajuan"
+activate UI
+
+UI -> CTRL : postPengajuan(dataPeminjaman)
+activate CTRL
+
+CTRL -> DB : cekKetersediaan(idRuangan, tanggal, waktu)
+activate DB
+DB --> CTRL : statusKetersediaan
+deactivate DB
+
+alt Ruangan Tersedia
+    CTRL -> DB : insertPeminjaman(dataPeminjaman, "Pending")
+    activate DB
+    DB --> CTRL : idPengajuan / success
+    deactivate DB
+    CTRL --> UI : responseSuccess("Pengajuan berhasil disimpan")
+    UI --> mhs : Tampilkan tanda terima & status pending
+else Jadwal Bentrok
+    CTRL --> UI : responseError("Ruangan sudah dipesan pada waktu tersebut")
+    UI --> mhs : Tampilkan notifikasi jadwal bentrok
+end
+
+deactivate CTRL
+deactivate UI
+@enduml
