@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+|Mahasiswa|
+start
+:Pilih ruangan dan tanggal peminjaman;
+:Unggah surat izin kegiatan;
+:Kirim formulir peminjaman;
+
+|Sistem|
+:Validasi kelengkapan berkas formulir;
+if (Data formulir lengkap?) then (Ya)
+    :Simpan status "Menunggu Konfirmasi";
+    :Kirim notifikasi pengajuan ke Admin;
+else (Tidak)
+    :Tampilkan pesan error data belum lengkap;
+    |Mahasiswa|
+    :Lengkapi kembali formulir;
+    stop
+endif
+
+|Admin Ruangan|
+:Periksa kesesuaian berkas dan jadwal;
+if (Pengajuan disetujui?) then (Disetujui)
+    :Ubah status pengajuan menjadi "Disetujui";
+    |Sistem|
+    :Kunci jadwal ruangan pada kalender;
+    :Kirim email konfirmasi persetujuan;
+else (Ditolak)
+    |Admin Ruangan|
+    :Tulis catatan alasan penolakan;
+    :Ubah status pengajuan menjadi "Ditolak";
+    |Sistem|
+    :Kirim email notifikasi penolakan;
+endif
+
+|Mahasiswa|
+:Terima informasi status peminjaman;
+stop
+@enduml
