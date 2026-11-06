@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+hide circle
+skinparam linetype ortho
+
+entity "Mahasiswa" as mhs {
+    * nim : VARCHAR(15) <<PK>>
+    --
+    * nama : VARCHAR(100)
+    * program_studi : VARCHAR(50)
+    * no_telp : VARCHAR(15)
+    * email : VARCHAR(100)
+}
+
+entity "Ruangan" as ruang {
+    * id_ruangan : INT <<PK>>
+    --
+    * nama_ruangan : VARCHAR(50)
+    * kapasitas : INT
+    * lokasi_gedung : VARCHAR(50)
+    * fasilitas : TEXT
+}
+
+entity "Peminjaman" as pinjam {
+    * id_peminjaman : INT <<PK>>
+    --
+    * nim : VARCHAR(15) <<FK>>
+    * id_ruangan : INT <<FK>>
+    * tanggal_pinjam : DATE
+    * waktu_mulai : TIME
+    * waktu_selesai : TIME
+    * keperluan : VARCHAR(255)
+    * berkas_izin : VARCHAR(255)
+    * status : VARCHAR(20)
+}
+
+entity "Persetujuan" as acc {
+    * id_persetujuan : INT <<PK>>
+    --
+    * id_peminjaman : INT <<FK>>
+    * id_admin : INT
+    * tanggal_review : DATETIME
+    * catatan : TEXT
+    * status_final : VARCHAR(20)
+}
+
+mhs ||--o{ pinjam : "mengajukan"
+ruang ||--o{ pinjam : "dipesan dalam"
+pinjam ||--o| acc : "memiliki"
+@enduml
